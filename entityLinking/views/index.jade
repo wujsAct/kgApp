@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .container
+    h1 Entity Linking
+  .container
+    form(method='post', action='/index/postTexts', enctype='multipart/form-data')
+      .form-group
+        label NER_L Input
+        textarea.form-control(name='linkingText',id='linkingText')
+      input.btn.btn-default(name='submit',type='submit',value='Start Linking')
+      
