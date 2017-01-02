@@ -29,7 +29,4 @@ input[type='text'], select, textarea{
 select{
   height: 28px;
 }
-textarea{
-  height:200px;
-  width:200px;
-}
+textarea{resize: vertical;max-height: 300px; min-height: 200px;}
