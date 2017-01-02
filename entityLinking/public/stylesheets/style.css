@@ -16,8 +16,8 @@ footer{
 }
 
 label{
-  display:inline-block;
-  width:180px;
+  width: auto;
+  display: inline-block;
 }
 
 input[type='text'], select, textarea{
@@ -30,3 +30,5 @@ select{
   height: 28px;
 }
 textarea{resize: vertical;max-height: 300px; min-height: 200px;}
+/**
+textarea{resize: horizontal;max-width: 400px; min-height: 200px;}**/
