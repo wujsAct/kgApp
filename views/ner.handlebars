@@ -1,0 +1,75 @@
+<div class="row">
+      <div class="container jumbotron">
+        <div class="col-xs-12">
+          <h1>LSTM-CRF based NER</h1>
+          <div class="formContainer">
+            <form class="newsletterForm" role="form"
+                action="/process?form=newsletter" method="POST">
+              <input type="hidden" name="_csrf" val="{{csrf}}">
+              <div class="form-group">
+                <label for="fieldName">文本</label>
+                <textarea class="form-control" rows="4" id="fieldName" name="name"></textarea>
+                 {{!-- <input type="text" class="form-control" id="fieldName" name="name"> --}}
+              </div>
+              <div class="form-group">
+                <button  type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </form>
+            <div>
+              <table id="NERTable" class="table table-bordered dataTable"
+                    data-row-style="rowStyle"
+                    data-pagination="true"
+                    >
+              </table>
+            </div>
+            </div>
+        </div>
+      </div>
+</div>
+
+
+
+
+ <script>
+ var rowStyle = function(row,index){
+   var classArr = ['success','info'];
+   if(index%2==0){ //even number line
+     return {classes:classArr[0]};
+   }else{//odd number line
+     return {classes:classArr[1]};
+   }
+ }
+  $(document).ready(function(){
+    $('.newsletterForm').on('submit',function(evt){
+      evt.preventDefault();
+      var action = $(this).attr('action');
+      var $container = $(this).closest('.formContainer');
+      var name = $('#fieldName').val();
+      $.ajax({
+        url:action,
+        type:'POST',
+        dataTpe:'json',
+        data:{'name':name},
+        success:function(data){
+          if(data.success){
+            nerjsonArray =JSON.parse(data.retData);
+            $('#NERTable').bootstrapTable('destroy');  //这样是不是太浪费资源了呢？
+            $('#NERTable').bootstrapTable({columns:[{field:'Id',title:'Id'},
+                                                     {field:'Mention',title:'Mention'},
+                                                     {field:'SentNo',title:'SentNo'},
+                                                     {field:'MentionIndex',title:'MentionIndex'}
+                                           ],
+                                           data:nerjsonArray,
+                                           refresh:{silent:true}
+                                           });
+          }else{
+            $container.html('There were a problem.');
+          }
+        },
+        error:function(){
+          $container.html('There was a problem...');
+        }
+      });
+    });
+  });
+ </script>

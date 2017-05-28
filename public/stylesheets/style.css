@@ -1,0 +1,27 @@
+body{
+  padding-top: 50px;
+}
+
+footer{
+  background: #f4f4f4;
+  height: 40px;
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 10px;
+  overflow: auto;
+}
+
+label{
+  width: auto;
+  display: inline-block;
+}
+input[type='text'],select,textarea{
+  padding: 3px;
+  height: 200px;
+  width: 200px;
+  border: 1px #ccc solid;
+}
+select{
+  height: 28px;
+}
+textarea{resize: vertical;max-height: 300px;min-height: 200px;}
